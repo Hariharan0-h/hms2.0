@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System - Patient Registration</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="styles2.css">
+</head>
+<body>
+    <div class="loading-overlay" id="loading-overlay">
+        <div class="loader"></div>
+    </div>
+    
+    <div class="toast-container" id="toast-container">
+        <!-- Toast notifications will be dynamically added here -->
+    </div>
+    
+    <header>
+        <div class="header-content">
+            <div class="logo">
+                <div class="logo-icon">
+                    <img src="AuroiTech_logo.png" alt="AuroiTech Logo">
+                </div>
+                <span class="logo-text">Hospital Management System</span>
+            </div>
+            <div class="date-display" id="currentDate">28 Mar. 2025</div>
+        </div>
+    </header>
+    
+    <nav class="nav-tabs">
+        <div class="nav-tab active" data-tooltip="Register new patients">
+            <i class="fas fa-user"></i>
+            Patient Registration
+        </div>
+        <div class="nav-tab" data-tooltip="Manage patient documents">
+            <i class="fas fa-file-medical"></i>
+            Documents
+        </div>
+        <div class="nav-tab" data-tooltip="Schedule and manage appointments">
+            <i class="fas fa-calendar-check"></i>
+            Appointments
+        </div>
+        <div class="nav-tab" data-tooltip="Track patient medications">
+            <i class="fas fa-pills"></i>
+            Medication
+        </div>
+        <div class="nav-tab" data-tooltip="View reports and analytics">
+            <i class="fas fa-chart-line"></i>
+            Reports
+        </div>
+        <div class="nav-tab" data-tooltip="Configure system settings">
+            <i class="fas fa-cog"></i>
+            Settings
+        </div>
+    </nav>
+    
+    <div class="registration-bar">
+        <div class="reg-field" data-tooltip="Select if this is a new or existing patient">
+            <select id="patient-registration">
+                <option value="">Patient Registration</option>
+                <option value="new" selected>New Registration</option>
+                <option value="existing">Existing Patient</option>
+            </select>
+        </div>
+        <div class="reg-field" data-tooltip="Type of patient visit">
+            <select id="patient-instance">
+                <option value="">Patient Instance</option>
+                <option value="outpatient" selected>Outpatient</option>
+                <option value="inpatient">Inpatient</option>
+                <option value="emergency">Emergency</option>
+            </select>
+        </div>
+        <div class="reg-field" data-tooltip="Payment classification">
+            <select id="pay-free">
+                <option value="">Pay / Free</option>
+                <option value="pay" selected>Paying</option>
+                <option value="free">Non-Paying</option>
+                <option value="insurance">Insurance</option>
+            </select>
+        </div>
+        <div class="reg-field" data-tooltip="Patient classification">
+            <select id="patient-type">
+                <option value="">Patient Type</option>
+                <option value="general" selected>General</option>
+                <option value="vip">VIP</option>
+                <option value="staff">Staff</option>
+            </select>
+        </div>
+        <div class="reg-field" data-tooltip="Unique Identification Number">
+            <input type="text" id="uin" placeholder="UIN (Unique ID Number)">
+        </div>
+        <div class="reg-field" data-tooltip="Medical Record Number - auto-generated for new patients">
+            <input type="text" id="mrn" placeholder="MRN (Medical Record Number)">
+        </div>
+    </div>
+    
+    <div class="main-content container">     
+        <div class="form-card">
+            <div class="form-section">
+                <div class="section-header">
+                    <i class="fas fa-user-circle"></i>
+                    Personal Information
+                    <div class="photo-picker-icon" id="photo-picker-btn">
+                        <i class="fas fa-camera"></i>
+                    </div>
+                </div>
+                <div class="section-content">
+                    <div class="form-field">
+                        <input type="text" id="first-name" placeholder="First Name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="text" id="last-name" placeholder="Last Name" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="date" id="dob" placeholder="Date of Birth" required>
+                    </div>
+                    <div class="form-field">
+                        <input type="number" id="age" placeholder="Age" readonly>
+                    </div>
+                    <div class="form-field">
+                        <select id="gender" required>
+                            <option value="" selected disabled>Gender</option>
+                            <option value="male">Male</option>
+                            <option value="female">Female</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="address-contact-container">
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-map-marker-alt"></i>
+                        Address Information
+                    </div>
+                    <div class="section-content">
+                        <div class="form-field">
+                            <select id="country" required>
+                                <option value="" selected disabled>Country</option>
+                                <option value="india">India</option>
+                                <option value="usa">United States</option>
+                                <option value="uk">United Kingdom</option>
+                                <option value="canada">Canada</option>
+                                <option value="australia">Australia</option>
+                            </select>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" id="state" placeholder="State" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" id="city" placeholder="City" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" id="pincode" placeholder="Pincode" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="text" id="address-line" placeholder="Address Line">
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="form-section">
+                    <div class="section-header">
+                        <i class="fas fa-phone-alt"></i>
+                        Contact Information
+                    </div>
+                    <div class="section-content">
+                        <div class="form-field">
+                            <input type="tel" id="mobile" placeholder="Mobile Number" required>
+                        </div>
+                        <div class="form-field">
+                            <input type="tel" id="alt-mobile" placeholder="Alternate Mobile">
+                        </div>
+                        <div class="form-field">
+                            <input type="email" id="email" placeholder="Email Address">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">
+                    <i class="fas fa-clipboard-list"></i>
+                    Visit Information
+                </div>
+                <div class="section-content">
+                    <div class="form-field">
+                        <select id="purpose-visit" required>
+                            <option value="" selected disabled>Purpose of Visit</option>
+                            <option value="regular">Regular Investigation - OP</option>
+                            <option value="emergency">Emergency</option>
+                            <option value="followup">Follow Up</option>
+                            <option value="referral">Referral</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <select id="referral">
+                            <option value="" selected disabled>Normal/Referral</option>
+                            <option value="normal">Normal</option>
+                            <option value="referral">Referral</option>
+                        </select>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="assign-doctor">
+                        <label for="assign-doctor">Assign Doctor Now</label>
+                    </div>
+                    <!-- Consent button will be added here by JavaScript -->
+                </div>
+            </div>
+            
+            <div class="form-section">
+                <div class="section-header">
+                    <i class="fas fa-credit-card"></i>
+                    Payment Information
+                </div>
+                <div class="section-content">
+                    <div class="form-field">
+                        <select id="patient-category" required>
+                            <option value="" selected disabled>Patient Category</option>
+                            <option value="full">FULL PAYMENT</option>
+                            <option value="partial">PARTIAL PAYMENT</option>
+                            <option value="free">FREE</option>
+                        </select>
+                    </div>
+                    <div class="form-field">
+                        <select id="payment-type">
+                            <option value="" selected disabled>Payment Type</option>
+                            <option value="cash">CASH</option>
+                            <option value="card">CARD</option>
+                            <option value="upi">UPI</option>
+                            <option value="insurance">INSURANCE</option>
+                        </select>
+                    </div>
+                    <div class="form-field fee-field">
+                        <input type="number" id="fees" placeholder="Fees" value="100">
+                        <button class="fees-add-btn" data-tooltip="Add fees">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                    
+                    <div class="checkbox-group">
+                        <input type="checkbox" id="health-insurance">
+                        <label for="health-insurance">Do you have health insurance?</label>
+                    </div>
+                    
+                    <div class="form-field">
+                        <select id="insurance-provider" disabled>
+                            <option value="" selected disabled>Insurance Provider</option>
+                            <option value="apollo">Apollo Insurance</option>
+                            <option value="star">Star Health</option>
+                            <option value="lic">LIC Health</option>
+                            <option value="icici">ICICI Lombard</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="action-buttons">
+            <button class="btn btn-secondary" data-tooltip="Clear all fields">
+                <i class="fas fa-redo"></i>
+                <span>Reset</span>
+            </button>
+            <button class="btn btn-warning" data-tooltip="Print registration form">
+                <i class="fas fa-print"></i>
+                <span>Print</span>
+            </button>
+            <button class="btn btn-danger" data-tooltip="Cancel registration">
+                <i class="fas fa-times"></i>
+                <span>Cancel</span>
+            </button>
+            <button class="btn btn-primary" id="submit-btn" data-tooltip="Save patient information">
+                <i class="fas fa-save"></i>
+                <span>Submit</span>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Photo Upload Modal -->
+    <div class="modal" id="photo-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Upload Profile Photo</h2>
+                <button class="modal-close" id="close-modal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="picture-upload">
+                    <i class="fas fa-camera"></i>
+                    <p>Click to upload photo or drag and drop</p>
+                    <input type="file" id="profile-picture" accept="image/*" style="display: none;">
+                </div>
+                <div id="preview-container" style="display: none;">
+                    <img id="image-preview">
+                    <div class="preview-actions">
+                        <button class="btn btn-danger" id="remove-photo">
+                            <i class="fas fa-trash"></i> <span>Remove</span>
+                        </button>
+                        <button class="btn btn-primary" id="save-photo">
+                            <i class="fas fa-check"></i> <span>Use This Photo</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Consent Form Modal - Empty container to be filled by JavaScript -->
+    <div class="modal" id="consent-modal"></div>
+    
+    <div class="autosave-indicator">
+        <i class="fas fa-save"></i>
+        <span>Autosaving...</span>
+    </div>
+    
+    <footer>
+        <p>© 2025 AuroiTech Hospital Management System</p>
+    </footer>
+    
+    <script src="script2.js"></script>
+</body>
+</html>
